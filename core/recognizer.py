@@ -12,20 +12,21 @@ class Recognizer:
         
     def _capture_command(self, src):
         while True:
-            words = self._listening(src)
-            if not words:
+            sentence = self._listening(src)
+            if not sentence:
                 continue
-            if self._call_command(words.split()):
-                return words
+            if self._call_command(sentence):
+                return sentence
                 
-    def _call_command(self, words):
-        return "aura" in words
+    def _call_command(self, sentence):
+        sentence = sentence.split()
+        return "aura" in sentence
 
     def _listening(self, src):
         rec = self.recognizer
         try: 
             audio = rec.listen(src, timeout=3, phrase_time_limit=7)
-            return rec.recognize_google(audio, language='pt-BR').lower()
+            return rec.recognize_google(audio, language='pt-BR')
         except sr.WaitTimeoutError:
             return None
         except sr.UnknownValueError:

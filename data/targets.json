@@ -1,0 +1,12 @@
+{
+    "spotify":{"weight": 0, "exec": "spotify","category":"music", "path_system":{"linux":"","win32":""}},
+    "vscode":{"weight": 0, "exec": "code","category":"ide", "path_system":{"linux":"","win32":""}},
+    "steam":{"weight":0, "exec":"steam", "category":"games","path_system":{"linux":"", "win32":""}},
+    "notepad++":{"weight":0, "exec":"notepad++", "category":"ide","path_system":{"linux":"", "win32":""}},
+    "obsidian":{"weight":0, "exec":"obsidian", "category":"projects","path_system":{"linux":"", "win32":""}},
+    "discord":{"weight":0, "exec":"discord", "category":"social","path_system":{"linux":"", "win32":""}},
+    "crunchyroll":{"weight":0, "exec":"https://www.crunchyroll.com/pt-br", "category":"streaming","path_system":null},
+    "youtube":{"weight":0, "exec":"https://www.youtube.com/", "category":"streaming","path_system":null},
+    "netflix":{"weight":0, "exec":"https://www.netflix.com/br/", "category":"streaming","path_system":null},
+    "globoplay":{"weight":0, "exec":"https://globoplay.globo.com/", "category":"streaming","path_system":null}
+}
