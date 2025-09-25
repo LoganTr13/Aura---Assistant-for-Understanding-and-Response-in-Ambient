@@ -1,18 +1,22 @@
 import speech_recognition as sr 
+import logging
 
 class Recognizer:
     def __init__(self):
         self.recognizer = sr.Recognizer()
         self.source = sr.Microphone()
+        self.logger = logging.setLogger(__name__)
     
     def start(self):
         with self.source as src:
+            self.logger.debug("Capturing Audio...")
             self.recognizer.adjust_for_ambient_noise(src, duration=0.5)
             return self._capture_command(src)
         
     def _capture_command(self, src):
         while True:
             sentence = self._listening(src)
+            self.logger.debug("Sentence Input: " + sentence)
             if not sentence:
                 continue
             if self._call_command(sentence):
@@ -32,5 +36,5 @@ class Recognizer:
         except sr.UnknownValueError:
             return None
         except Exception as e:
-            print("Me desculpe, durante o aguardo ocorreu o seguinte erro: " + e)
+            self.logger.error("Sorry, during audio capture the following error occurred: " + e)
             return None

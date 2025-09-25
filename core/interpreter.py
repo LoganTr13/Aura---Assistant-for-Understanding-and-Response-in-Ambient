@@ -1,4 +1,5 @@
 from core.trie import Trie
+import logging
 import json
 import os
 
@@ -6,22 +7,25 @@ class Interpreter():
     def __init__(self):
         self.dict = {}
         self.trie_dict = {}
+        self.logger = logging.setLogger(__name__)
         
     def start(self,folder='./data'):
         self._load_data(folder)
         
         verbs_data = self.dict.get('verbs')
         if not isinstance(verb_data, dict):
-            print("Erro: verbs.json não encontrado ou formato inválido")
+            self.logger.critical('Verbs.json not found or format invalid')
             return
         verbs_trie = self._build_trie_synonyms(verbs_data)
         self.trie_dict = verb_trie
+        self.logger.info('Trie verbs created.')
 
     def _load_data(self,folder):
         for filename in os.listdir(folder):
             if filename.endswith('.json'):
                 key = os.path.splitext(filename)[0]
                 with open(os.path.join(folder, filename), encoding='utf-8') as f:
+                    self.logger.debug(f'file {filename} loaded sucessfully.')
                     self.dict[key] = json.load(f)
 
     def _build_trie_synonyms(self, data):
