@@ -5,7 +5,7 @@ class Recognizer:
     def __init__(self):
         self.recognizer = sr.Recognizer()
         self.source = sr.Microphone()
-        self.logger = logging.setLogger(__name__)
+        self.logger = logging.getLogger(__name__)
     
     def start(self):
         with self.source as src:
@@ -16,9 +16,11 @@ class Recognizer:
     def _capture_command(self, src):
         while True:
             sentence = self._listening(src)
-            self.logger.debug("Sentence Input: " + sentence)
             if not sentence:
                 continue
+
+            self.logger.debug("Sentence Input: " + sentence)
+            
             if self._call_command(sentence):
                 return sentence
                 

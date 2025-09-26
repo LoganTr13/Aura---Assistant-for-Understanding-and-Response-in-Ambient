@@ -1,15 +1,17 @@
 from core.recognizer import Recognizer
 from core.interpreter import Interpreter
+from datetime import datetime
 import os
 import logging
 
 def setup_log():
+    log_filename = datetime.now().strftime("system_log_%Y-%m-%d_%H-%M-%S.log")
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         handlers=[
                 logging.StreamHandler(),
-                logging.FileHandler("system_log_%(asctime)s.log", encoding="utf-8")
+                logging.FileHandler(log_filename, encoding="utf-8",mode="w")
             ]
     )
 
@@ -18,7 +20,6 @@ def main():
     logger = logging.getLogger(__name__)
     microphone = Recognizer()
     interpretador = Interpreter()
-    os.system('cls')
     while True:
         logger.info("System running, wait for input of microphone...")
         sentence = microphone.start()

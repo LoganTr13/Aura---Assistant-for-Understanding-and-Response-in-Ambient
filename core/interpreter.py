@@ -7,7 +7,7 @@ class Interpreter():
     def __init__(self):
         self.dict = {}
         self.trie_dict = {}
-        self.logger = logging.setLogger(__name__)
+        self.logger = logging.getLogger(__name__)
         
     def start(self,folder='./data'):
         self._load_data(folder)

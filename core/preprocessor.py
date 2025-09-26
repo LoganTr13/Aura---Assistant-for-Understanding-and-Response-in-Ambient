@@ -3,7 +3,7 @@ import logging
 
 class Preprocessor:
     def __init__(self):
-        self.logger = logging.setLogger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     def normalize(self, sentence):
         sentence_lowered = sentence.lower()
