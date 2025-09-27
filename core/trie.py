@@ -1,3 +1,5 @@
+import logging
+
 class TrieNode:
     def __init__(self):
         self.children = {}
@@ -5,14 +7,14 @@ class TrieNode:
     
 class Trie:
     def __init__(self):
-        self.root = trieNode()
+        self.logger = logging.getLogger(__name__)
+        self.root = TrieNode()
 
     def insert(self, word, valueReturn=None):
         node = self.root
-
         for char in word:
             if char not in node.children:
-                node.children[char] = trieNode()
+                node.children[char] = TrieNode()
             node = node.children[char]
         if valueReturn: 
             node.value = valueReturn
@@ -24,9 +26,10 @@ class Trie:
         for char in word:
             if char not in node.children:
                 return None
-            none = none.children[char]
+            node = node.children[char]
         if not node.value:
             return None
+        self.logger.debug('Value "%s" found in trie search', node.value)
         return node.value
 
 
